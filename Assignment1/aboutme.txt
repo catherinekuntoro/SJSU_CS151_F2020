@@ -1,0 +1,13 @@
+Name: Catherine Kuntoro
+Preferred name: Catherine
+Student ID: 014037166
+Major: Computer Science
+Preferred email address: catherine.kuntoro@sjsu.edu
+Student status: Undergraduate
+Graduating senior: No
+Repeating the class: No
+Other CS courses completed at SJSU: CS 46B, CS 146, CS 47
+Additional information: No
+Special topics interest: I would like to learn more about machine learning!
+			But I'm happy to learn anything that's
+			relevant to the current CS field.
