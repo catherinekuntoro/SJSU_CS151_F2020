@@ -1,6 +1,6 @@
 public class AnimalTest {
     public static void main(String[] args) {
-        Animal a = new Animal("Animal", "ani", 11, "f", "d", 1);
+
 
         Cat c = new Cat("Cat", "cat", 12, "f", "Domestic", 2);
         System.out.println(c.toString());
@@ -11,8 +11,6 @@ public class AnimalTest {
         c.walk();
         c.greetHuman();
         c.scratch();
-
-        System.out.println();
 
         Dog d = new Dog("Dog", "dog", 13, "f", "Domestic", 3);
         System.out.println(d.toString());
