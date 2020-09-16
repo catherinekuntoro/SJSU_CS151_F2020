@@ -2,16 +2,16 @@ public class Employee extends Person {
 
     private int id;
     private String status;
-    private double basePay;
+    private Double basePay;
 
     //add employee id,
     //employee status (can be contractor, full time, part time),
     // pay amount (employee's base pay).
     public Employee(String firstName, String lastName, int age,
                     String socialSecurityNum, String address,
-                    String gender, double weight,
+                    String gender, Double weight,
                     int id, String status,
-                    double basePay) {
+                    Double basePay) {
         super(firstName, lastName, age, socialSecurityNum, address, gender, weight);
         this.id = id;
         this.status = status;
@@ -20,7 +20,7 @@ public class Employee extends Person {
 
     //unit worked = #hrs for part time/contract
     //            = #weeks for full time
-    public double calculatePay(double unitsWorked) {
+    public Double calculatePay(Double unitsWorked) {
         if (status.equalsIgnoreCase("full time")) {
             return (getBasePay() / 52) * (unitsWorked);
         } else {
@@ -62,11 +62,11 @@ public class Employee extends Person {
         this.status = status;
     }
 
-    public double getBasePay() {
+    public Double getBasePay() {
         return basePay;
     }
 
-    public void setBasePay(double basePay) {
+    public void setBasePay(Double basePay) {
         this.basePay = basePay;
     }
 }
