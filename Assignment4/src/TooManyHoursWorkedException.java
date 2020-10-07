@@ -1,4 +1,4 @@
-public class TooManyHoursWorkedException extends RuntimeException {
+public class TooManyHoursWorkedException extends Exception {
     public TooManyHoursWorkedException(String message) {
         super(message);
     }
