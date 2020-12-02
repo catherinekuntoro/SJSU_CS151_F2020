@@ -10,35 +10,35 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
+import javafx.scene.shape.Box;
 import javafx.scene.shape.Cylinder;
 import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Sphere;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class Animation extends Application {
     //2D and 3D Shape
-    private Rectangle rectangle;
+    private Box box;
     private Polygon polygon;
     private Sphere sphere;
     private Cylinder cylinder;
 
     //Rotate Transition Buttons
     private Button rotateTransitionButtonPolygon;
-    private Button rotateTransitionButtonRectangle;
+    private Button rotateTransitionButtonBox;
     private Button rotateTransitionButtonCylinder;
     private Button rotateTransitionButtonSphere;
 
     //Scale Transition Buttons
     private Button scaleTransitionButtonPolygon;
-    private Button scaleTransitionButtonRectangle;
+    private Button scaleTransitionButtonBox;
     private Button scaleTransitionButtonCylinder;
     private Button scaleTransitionButtonSphere;
 
     //Sequential Transition Buttons
     private Button sequentialTransitionButtonPolygon;
-    private Button sequentialTransitionButtonRectangle;
+    private Button sequentialTransitionButtonBox;
     private Button sequentialTransitionButtonCylinder;
     private Button sequentialTransitionButtonSphere;
 
@@ -55,7 +55,7 @@ public class Animation extends Application {
 
         GridPane root = new GridPane();
         FlowPane flowPanePolygon = new FlowPane();
-        FlowPane flowPaneRectangle = new FlowPane();
+        FlowPane flowPaneBox = new FlowPane();
         FlowPane flowPaneSphere = new FlowPane();
         FlowPane flowPaneCylinder = new FlowPane();
 
@@ -76,8 +76,8 @@ public class Animation extends Application {
         setUpPolygon();
         flowPanePolygon.getChildren().add(polygon);
 
-        setUpRectangle();
-        flowPaneRectangle.getChildren().add(rectangle);
+        setUpBox();
+        flowPaneBox.getChildren().add(box);
 
         //set up 3d items, add to flow pane and then root---------------
         setUpCylinder();
@@ -88,7 +88,7 @@ public class Animation extends Application {
 
         //adding flow panes to root grid pane:-----------------------
         root.add(flowPanePolygon, 0, 0);
-        root.add(flowPaneRectangle, 1, 0);
+        root.add(flowPaneBox, 1, 0);
         root.add(flowPaneCylinder, 0, 1);
         root.add(flowPaneSphere, 1, 1);
 
@@ -96,8 +96,8 @@ public class Animation extends Application {
         setUpRotateTransitionPolygonButton();
         flowPanePolygon.getChildren().add(rotateTransitionButtonPolygon);
 
-        setUpRotateTransitionRectangleButton();
-        flowPaneRectangle.getChildren().add(rotateTransitionButtonRectangle);
+        setUpRotateTransitionBoxButton();
+        flowPaneBox.getChildren().add(rotateTransitionButtonBox);
 
 
         setUpRotateTransitionCylinderButton();
@@ -110,8 +110,8 @@ public class Animation extends Application {
         setUpScaleTransitionPolygonButton();
         flowPanePolygon.getChildren().add(scaleTransitionButtonPolygon);
 
-        setUpScaleTransitionRectangleButton();
-        flowPaneRectangle.getChildren().add(scaleTransitionButtonRectangle);
+        setUpScaleTransitionBoxButton();
+        flowPaneBox.getChildren().add(scaleTransitionButtonBox);
 
         setUpScaleTransitionCylinderButton();
         flowPaneCylinder.getChildren().add(scaleTransitionButtonCylinder);
@@ -123,8 +123,8 @@ public class Animation extends Application {
         setUpSequentialTransitionPolygonButton();
         flowPanePolygon.getChildren().add(sequentialTransitionButtonPolygon);
 
-        setUpSequentialTransitionRectangleButton();
-        flowPaneRectangle.getChildren().add(sequentialTransitionButtonRectangle);
+        setUpSequentialTransitionBoxButton();
+        flowPaneBox.getChildren().add(sequentialTransitionButtonBox);
 
         setUpSequentialTransitionSphereButton();
         flowPaneSphere.getChildren().add(sequentialTransitionButtonSphere);
@@ -186,13 +186,11 @@ public class Animation extends Application {
         });
     }
 
-    private void setUpSequentialTransitionRectangleButton() {
-        sequentialTransitionButtonRectangle = new Button("Sequential Transition");
-        FadeTransition ft = new FadeTransition(Duration.seconds(3));
-        ft.setFromValue(1.0f);
-        ft.setToValue(0.3f);
-        ft.setCycleCount(1);
-        ft.setAutoReverse(true);
+    private void setUpSequentialTransitionBoxButton() {
+        sequentialTransitionButtonBox = new Button("Sequential Transition");
+        RotateTransition rt = new RotateTransition(Duration.seconds(3));
+        rt.setByAngle(360);
+        rt.setAutoReverse(true);
 
         TranslateTransition tt = new TranslateTransition(Duration.seconds(3));
         tt.setFromX(-50f);
@@ -200,10 +198,10 @@ public class Animation extends Application {
         tt.setCycleCount(2);
         tt.setAutoReverse(true);
 
-        sequentialTransitionButtonRectangle.setOnAction(new EventHandler<ActionEvent>() {
+        sequentialTransitionButtonBox.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                SequentialTransition seqT = new SequentialTransition(rectangle, ft, tt);
+                SequentialTransition seqT = new SequentialTransition(box, tt, rt);
                 seqT.play();
             }
         });
@@ -269,12 +267,12 @@ public class Animation extends Application {
         });
     }
 
-    private void setUpScaleTransitionRectangleButton() {
-        scaleTransitionButtonRectangle = new Button("Scale Transition");
-        scaleTransitionButtonRectangle.setOnAction(new EventHandler<ActionEvent>() {
+    private void setUpScaleTransitionBoxButton() {
+        scaleTransitionButtonBox = new Button("Scale Transition");
+        scaleTransitionButtonBox.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                ScaleTransition st = new ScaleTransition(Duration.seconds(3), rectangle);
+                ScaleTransition st = new ScaleTransition(Duration.seconds(3), box);
                 st.setByX(1.5f);
                 st.setByY(1.5f);
                 st.setCycleCount(4);
@@ -329,13 +327,13 @@ public class Animation extends Application {
         });
     }
 
-    private void setUpRotateTransitionRectangleButton() {
-        rotateTransitionButtonRectangle = new Button("Rotate Transition");
+    private void setUpRotateTransitionBoxButton() {
+        rotateTransitionButtonBox = new Button("Rotate Transition");
 
-        rotateTransitionButtonRectangle.setOnAction(new EventHandler<ActionEvent>() {
+        rotateTransitionButtonBox.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                RotateTransition rotateTransition = new RotateTransition(Duration.seconds(3), rectangle);
+                RotateTransition rotateTransition = new RotateTransition(Duration.seconds(3), box);
                 rotateTransition.setByAngle(360);
                 rotateTransition.play();
             }
@@ -374,11 +372,13 @@ public class Animation extends Application {
         polygon.setFill(Color.CORNFLOWERBLUE);
     }
 
-    private void setUpRectangle() {
-        rectangle = new Rectangle();
-        rectangle.setHeight(100);
-        rectangle.setWidth(100);
-        rectangle.setFill(Color.ORCHID);
+    private void setUpBox() {
+        box = new Box();
+        box.setHeight(100);
+        box.setWidth(100);
+        PhongMaterial phongMaterial = new PhongMaterial();
+        phongMaterial.setDiffuseColor(Color.ORCHID);
+        box.setMaterial(phongMaterial);
     }
 
     private void setUpSphere() {
